@@ -14,7 +14,7 @@ import static javax.persistence.CascadeType.REMOVE;
 @Getter
 @Setter
 @Table(name = "department")
-public class Departments {
+public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +24,11 @@ public class Departments {
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER ,mappedBy="department", cascade = REMOVE )
-    private Set<Employees> employee;
+    private Set<Employee> employee;
 
     @Override
     public String toString() {
-        return "Departments{" +
+        return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\''+'}';
     }

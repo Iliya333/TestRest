@@ -10,8 +10,8 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@Table(name = "employees")
-public class Employees {
+@Table(name = "employee")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,18 +32,18 @@ public class Employees {
     @Column(name = "salary")
     private Long salary;
 
-    @Column(name = "departments_id" , insertable = false, updatable = false)
+    @Column(name = "department_id" , insertable = false, updatable = false)
     private long departmentId;
 
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "departmentId"))
-    private Departments departments;
+    private Department department;
 
-    public Employees(){
+    public Employee(){
     }
 
-    public Employees(Long departmentId, String name, String surname,
-                     String patronymic, LocalDate birthday, Long salary) {
+    public Employee(Long departmentId, String name, String surname,
+                    String patronymic, LocalDate birthday, Long salary) {
         this.departmentId = departmentId;
         this.name = name;
         this.surname = surname;
@@ -54,7 +54,7 @@ public class Employees {
 
     @Override
     public String toString() {
-        return "Employees{" +
+        return "Employee{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
@@ -62,7 +62,7 @@ public class Employees {
                 ", birthday=" + birthday +
                 ", salary=" + salary +
                 ", departmentId=" + departmentId +
-                ", departments=" + departments +
+                ", departments=" + department +
                 '}';
     }
 
@@ -70,12 +70,12 @@ public class Employees {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Employees employees = (Employees) o;
-        return departmentId == employees.departmentId && Objects.equals(id, employees.id) && Objects.equals(name, employees.name) && Objects.equals(surname, employees.surname) && Objects.equals(patronymic, employees.patronymic) && Objects.equals(birthday, employees.birthday) && Objects.equals(salary, employees.salary) && Objects.equals(departments, employees.departments);
+        Employee employee = (Employee) o;
+        return departmentId == employee.departmentId && Objects.equals(id, employee.id) && Objects.equals(name, employee.name) && Objects.equals(surname, employee.surname) && Objects.equals(patronymic, employee.patronymic) && Objects.equals(birthday, employee.birthday) && Objects.equals(salary, employee.salary) && Objects.equals(department, employee.department);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, patronymic, birthday, salary, departmentId, departments);
+        return Objects.hash(id, name, surname, patronymic, birthday, salary, departmentId, department);
     }
 }
